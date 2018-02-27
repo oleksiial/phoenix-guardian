@@ -11,6 +11,12 @@ defmodule MyTestAppWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
+  end
+
+  pipeline :authenticated do
+    plug Guardian.Plug.EnsureAuthenticated
   end
 
   scope "/", MyTestAppWeb do
@@ -20,9 +26,11 @@ defmodule MyTestAppWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", MyTestAppWeb do
+  scope "/api/v1", MyTestAppWeb do
     pipe_through :api
+    # pipe_through :authenticated # restrict unauthenticated access for routes below
 
-    get "/", PageController, :index_api
+    post "/sign_up", RegistrationController, :sign_up
+    resources "/users", UserController, except: [:new, :edit]
   end
 end

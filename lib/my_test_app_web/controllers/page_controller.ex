@@ -6,7 +6,6 @@ defmodule MyTestAppWeb.PageController do
   end
 
   def index_api(conn, _params) do
-    conn
-    |> json "Hey yo"
+    json conn, "Hey yo"
   end
 end

@@ -28,9 +28,11 @@ defmodule MyTestAppWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api/v1", MyTestAppWeb do
     pipe_through :api
-    # pipe_through :authenticated # restrict unauthenticated access for routes below
 
     post "/sign_up", RegistrationController, :sign_up
+    post "/sign_in", SessionController, :sign_in # Add this line
+
+    pipe_through :authenticated
     resources "/users", UserController, except: [:new, :edit]
   end
 end

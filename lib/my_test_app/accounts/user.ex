@@ -9,8 +9,8 @@ defmodule MyTestApp.Accounts.User do
   schema "users" do
     field :email, :string
     field :name, :string
-    field :password, :string, virtual: true # We need to add this row
-    field :password_confirmation, :string, virtual: true # Confirmation for password field
+    field :password, :string, virtual: true
+    field :password_confirmation, :string, virtual: true
     field :password_hash, :string
 
     timestamps()

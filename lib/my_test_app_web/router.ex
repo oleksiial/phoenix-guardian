@@ -30,9 +30,9 @@ defmodule MyTestAppWeb.Router do
     pipe_through :api
 
     post "/sign_up", RegistrationController, :sign_up
-    post "/sign_in", SessionController, :sign_in # Add this line
+    post "/sign_in", SessionController, :sign_in
 
     pipe_through :authenticated
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit, :create]
   end
 end
